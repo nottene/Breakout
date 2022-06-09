@@ -19,8 +19,8 @@ void game() {
   }
   //bouncing
   if (dist(px, py, bx, by) < (bd + pd)/2) {
-    vx = (bx-px)/6;
-    vy = (by-py)/6;
+    vx = (bx-px)/5;
+    vy = (by-py)/5;
   }
   if (by < bd/2) {
     vy = -vy;
@@ -73,8 +73,8 @@ void manageBrick(int i) {
   if (y[i] == 425) fill(#0000FF);
   circle(x[i], y[i], brickd);
   if (dist(bx, by, x[i], y[i]) < bd/2 + brickd/2) {
-    vx = (bx-x[i])/10;
-    vy = (by-y[i])/10;
+    vx = (bx-x[i])/4;
+    vy = (by-y[i])/4;
     alive[i] = false;
     score++;
   }
