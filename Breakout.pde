@@ -1,3 +1,10 @@
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+
 int mode;
 final int INTRO = 1;
 final int GAME = 2;
@@ -21,13 +28,20 @@ int score;
 int lives;
 float timer;
 PFont oya;
+
+//gif
 PImage[] gif;
 int numberOfFrames;
 int f;
+
+//sound variables
+Minim minim;
+AudioPlayer theme, bounce, loseLife, win, lose;
+
 void setup() {
   size(800, 800, P2D);
   textAlign(CENTER);
-  oya = createFont("Breakout font.ttf",150);
+  oya = createFont("Breakout font.ttf", 150);
   mode=INTRO;
   brickd = 60;
   n = 39;
@@ -51,6 +65,15 @@ void setup() {
       tempy += 75;
     }
     i++;
+    
+    //minim
+    minim = new Minim(this);
+    minim = new Minim(this);
+    theme = minim.loadFile("theme.mp3");
+    bounce = minim.loadFile("bounce.wav");
+    loseLife = minim.loadFile("loseLife.wav");
+    win = minim.loadFile("win.mp3");
+    lose = minim.loadFile("lose.wav");
   }
 
   //set up paddle and ball
@@ -67,15 +90,14 @@ void setup() {
   score = 0;
   timer = 3;
   lives = 3;
-  
+
   //gif
   numberOfFrames = 8;
   gif = new PImage[numberOfFrames];
-  
   int a = 0;
-  while(a < numberOfFrames) {
-  gif[a] = loadImage("frame_"+a+"_delay-0.06s.gif");
-  a++;
+  while (a < numberOfFrames) {
+    gif[a] = loadImage("frame_"+a+"_delay-0.06s.gif");
+    a++;
   }
 }
 

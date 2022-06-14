@@ -1,19 +1,25 @@
 void gameover() {
   background(#767676);
+  theme.pause();
+  
   image(gif[f], 0, 0, width, height);
   if (frameCount%3==0) f++;
   if (f == numberOfFrames) f = 0;
+  //win
   if (score == 39) {
     textFont(oya);
     textSize(120);
     fill(#FFFFFF);
     text("YOU WON!!!", width/2, 200);
+    win.play();
   }
+  //lose
   if (lives == 0) {
     textFont(oya);
     textSize(120);
     fill(#FFFFFF);
     text("YOU LOST!!!", width/2, 200);
+    lose.play();
   }
   textSize(20);
   fill(#FFFFFF);
@@ -31,6 +37,7 @@ void gameoverClicks() {
   score = 0;
   timer = 3;
   lives = 3;
+  theme.rewind();
   n = 39;
   x = new int [n];
   y = new int [n];

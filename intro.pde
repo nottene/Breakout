@@ -1,12 +1,15 @@
 void intro() {
   background(#767676);
+  
   image(gif[f], 0, 0, width, height);
   if (frameCount%3==0) f++;
   if (f == numberOfFrames) f = 0;
+  
   textFont(oya);
   textSize(80);
   fill(#FFFFFF);
   text("RAINBOW BREAKER", width/2, 250);
+  
   //play button
   rectButton(300, 500, 500, 600);
   fill(#FFFFFF);

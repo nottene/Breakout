@@ -1,8 +1,10 @@
 void pause() {
   background(#767676);
+  
    image(gif[f], 0, 0, width, height);
   if(frameCount%3==0) f++;
   if (f == numberOfFrames) f = 0;
+  
   textSize(150);
   fill(#FFFFFF);
   text("PAUSE", width/2,height/2);

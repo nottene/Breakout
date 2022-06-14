@@ -1,5 +1,7 @@
 void game() {
   background(#767676);
+  theme.play();
+  
   //paddle
   fill(#FF00E1);
   strokeWeight(4);
@@ -8,6 +10,7 @@ void game() {
   if (akey) px = px-5;
   if (dkey) px = px+5;
   px = min(max(0, px), width);
+  
   //ball
   fill(#FFFFFF);
   strokeWeight(4);
@@ -17,17 +20,25 @@ void game() {
     bx += vx;
     by += vy;
   }
+  
   //bouncing
   if (dist(px, py, bx, by) < (bd + pd)/2) {
     vx = (bx-px)/5;
     vy = (by-py)/5;
+    bounce.rewind();
+    bounce.play();
   }
   if (by < bd/2) {
     vy = -vy;
+    bounce.rewind();
+    bounce.play();
   }
   if (bx < bd/2 || bx > width-bd/2) {
     vx = -vx;
+    bounce.rewind();
+    bounce.play();
   }
+  
   //bricks
   int i = 0;
   while (i<n) {
@@ -36,12 +47,14 @@ void game() {
     }
     i++;
   }
+  
   //scoreboard
   textFont(oya);
   textSize(40);
   fill(#FFFFFF);
   text("score: " + score, 150, 750);
   timer = timer -0.017;
+  
   //lose lives
   textFont(oya);
   textSize(40);
@@ -54,7 +67,10 @@ void game() {
     vx = 0;
     vy = 3;
     timer = 3;
+    loseLife.rewind();
+    loseLife.play();
   }
+  
   //go to end screen
   if (score == 39) {
     mode = GAMEOVER;
@@ -73,12 +89,16 @@ void manageBrick(int i) {
   if (y[i] == 425) fill(#0000FF);
   circle(x[i], y[i], brickd);
   if (dist(bx, by, x[i], y[i]) < bd/2 + brickd/2) {
-    vx = (bx-x[i])/4;
-    vy = (by-y[i])/4;
+    vx = (bx-x[i])/5;
+    vy = (by-y[i])/5;
     alive[i] = false;
     score++;
+    bounce.rewind();
+    bounce.play();
   }
 }
+
 void gameClicks() {
   mode = PAUSE;
+  theme.pause();
 }
